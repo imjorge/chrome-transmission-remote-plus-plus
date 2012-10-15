@@ -80,7 +80,13 @@ function rpcTransmission(args, method, tag, callback) {
 	nothing
 =================================================================================*/
 function getTorrent(url) {
-	var dirs = (localStorage.dLocation === 'dlcustom') ? JSON.parse(localStorage.dirs) : [];
+	//var dirs = (localStorage.dLocation === 'dlcustom') ? JSON.parse(localStorage.dirs) : [];
+  rpcTransmission('"fields": [ "downloadDir" ]', 'torrent-get', '',  function(data) {
+    dirs = []
+    $.each(data.arguments.torrents, function(i, torrent) {
+      dirs.push({label: torrent.downloadDir, dir: torrent.downloadDir});
+    });
+
 
 	// don't use base64 on magnet links
 	if (url.toLowerCase().indexOf('magnet:') > -1) {
@@ -122,6 +128,7 @@ function getTorrent(url) {
 			}
 		});
 	}
+  });
 }
 
 /*=================================================================================
