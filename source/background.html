@@ -83,6 +83,7 @@ function getTorrent(url) {
 	//var dirs = (localStorage.dLocation === 'dlcustom') ? JSON.parse(localStorage.dirs) : [];
   rpcTransmission('"fields": [ "downloadDir" ]', 'torrent-get', '',  function(data) {
     dirs = []
+    dirs.push({label: "< Default >", dir: ""});
     $.each(data.arguments.torrents, function(i, torrent) {
       dirs.push({label: torrent.downloadDir, dir: torrent.downloadDir});
     });
