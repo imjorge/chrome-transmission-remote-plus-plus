@@ -85,7 +85,8 @@ function getTorrent(url) {
     dirs = []
     dirs.push({label: "< Default >", dir: ""});
     $.each(data.arguments.torrents, function(i, torrent) {
-      dirs.push({label: torrent.downloadDir, dir: torrent.downloadDir});
+      dir = torrent.downloadDir;
+      dirs.push({label: dir, dir: dir});
     });
 
 

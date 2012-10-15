@@ -14,7 +14,8 @@
 	<li id="torrentName"></li>
 	<li>
 		<label id="downloadLabel" for="downloadLocations">Save in folder:</label>
-		<select id="downloadLocations"></select>
+                <select id="downloadLocations"></select>
+                <input id="downloadLocationExtra" placeholder="Extra location">
 		<div class="clear"></div>
 	</li>
 	<li id="filesContainer">
@@ -76,6 +77,7 @@ function createCheckBox(id) {
 // populate the download popup with the torrent information
 chrome.extension.onRequest.addListener(function (request, sender) {
 	var select = document.getElementById('downloadLocations'),
+                locationExtra = document.getElementById('downloadLocationExtra'),
 		option,
 		table = document.getElementById('files'),
 		row,
@@ -142,9 +144,11 @@ chrome.extension.onRequest.addListener(function (request, sender) {
 	});
 
 	$('#save').click( function (e) {
+                dir = select.options[select.selectedIndex].value;
+                if (locationExtra.value != "") dir += "/" + locationExtra.value;
 		chrome.extension.sendRequest({
 				'data': request.data
-			,	'dir': select.options[select.selectedIndex].value
+			,	'dir': dir
 			,	'blacklist': getNotSelectedFilesIds() // "files-wanted" not work for some reason
 		});
 		window.close();
