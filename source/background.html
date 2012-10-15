@@ -68,6 +68,17 @@ function rpcTransmission(args, method, tag, callback) {
 	});
 }
 
+function sort_unique(arr) {
+    arr = arr.sort();
+    var ret = [arr[0]];
+    for (var i = 1; i < arr.length; i++) { // start loop at 1 as element 0 can never be a duplicate
+        if (arr[i-1] !== arr[i]) {
+            ret.push(arr[i]);
+        }
+    }
+    return ret;
+}
+
 /*=================================================================================
  getTorrent(URL url)
 
@@ -82,10 +93,21 @@ function rpcTransmission(args, method, tag, callback) {
 function getTorrent(url) {
 	//var dirs = (localStorage.dLocation === 'dlcustom') ? JSON.parse(localStorage.dirs) : [];
   rpcTransmission('"fields": [ "downloadDir" ]', 'torrent-get', '',  function(data) {
-    dirs = []
-    dirs.push({label: "< Default >", dir: ""});
+    raw_dirs = [];
     $.each(data.arguments.torrents, function(i, torrent) {
-      dir = torrent.downloadDir;
+      reconstructed = []
+      $.each(torrent.downloadDir.split('/'), function(j, part) {
+        reconstructed.push(part);
+        dir = reconstructed.join("/");
+        if (dir != "")
+          raw_dirs.push(reconstructed.join("/"));
+      });
+    });
+    raw_dirs = sort_unique(raw_dirs);
+
+    dirs = [];
+    dirs.push({label: "< Default >", dir: ""});
+    $.each(raw_dirs, function(i, dir) {
       dirs.push({label: dir, dir: dir});
     });
 
