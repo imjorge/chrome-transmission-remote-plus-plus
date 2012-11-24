@@ -41,6 +41,12 @@ self.addEventListener('message', function(e) {
       var obj = getType() === "list" ? [] : {};
 
       incrementCounter( 1 );
+
+      if ( bencodedString.charAt( counter ) === 'e' ) {
+        incrementCounter( 1 );
+        return obj;
+      }
+      
       var type = getType();
 
       while( counter < bencodedString.length ) {
