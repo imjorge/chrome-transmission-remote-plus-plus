@@ -56,7 +56,7 @@ function encodeFile(file, callback) {
 	var reader = new FileReader();
 
 	reader.onload = function (e) {
-		callback(reader.result.replace('data:application/x-bittorrent;base64,', '').replace('data:base64,', ''));
+		callback(reader.result.replace('data:application/x-bittorrent;base64,', '').replace('data:base64,', '').replace('data:;base64,', ''));
 	};
 
 	reader.readAsDataURL(file);
