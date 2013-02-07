@@ -80,8 +80,7 @@ function getFile(url, callback) {
 	$.get(url, function(data) {
 		//TODO: why 'parseerror' thrown here??
 	}, 'dataview').complete(function(jqXHR, textStatus){
-		var blob = new WebKitBlobBuilder();
-		blob.append(jqXHR.responseText);
-		callback(blob.getBlob());
+		var blob = new Blob([jqXHR.responseText]);
+		callback(blob);
 	});
 }
