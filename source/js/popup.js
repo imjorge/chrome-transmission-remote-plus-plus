@@ -170,6 +170,9 @@ function refreshPopup() {
 	refresh = setTimeout(refreshPopup, 3000);
 }
 
+document.querySelector('#open-upload-basket').addEventListener('click', function() { chrome.windows.create({ url: 'basket.html', type: 'popup', width: 384, height: 384 }) });
+document.querySelector('#open-full-interface').addEventListener('click', function() { chrome.tabs.create({ url: localStorage.server + localStorage.webPath }) });
+
 (function() {
 	// persistent torrent type dropdown and filter textbox
 	$('#filter_type').val(localStorage.torrentType || 0);
