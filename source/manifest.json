@@ -18,7 +18,7 @@
       "48": "images/icon48.png"
    },
    "minimum_chrome_version": "15",
-   "name": "Remote Transmission++",
+   "name": "Remote Transmission Plus",
    "options_page": "options.html",
    "permissions": [ "http://*/", "https://*/", "contextMenus", "notifications", "tabs" ],
    "update_url": "http://clients2.google.com/service/update2/crx",
