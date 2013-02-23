@@ -1,6 +1,8 @@
 // communication port with background page
 var port = chrome.extension.connect({ name: 'options' });
 
+document.querySelector('#save').addEventListener('click', save);
+
 // add custom download directory to table
 /*=================================================================================
  addDir (string label, string dir)

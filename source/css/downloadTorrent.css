@@ -35,7 +35,7 @@ select, button {
 	line-height: 29px;
 }
 
-#downloadLocations {
+#downloadLocations, #downloadLocationExtra {
 	float: right;
 	width: 705px;
 	vertical-align: middle;
